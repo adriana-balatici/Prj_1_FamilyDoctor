@@ -1,6 +1,7 @@
 import controller.DoctorController;
 import model.Patient;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import repository.Repository;
 
 import java.util.List;
