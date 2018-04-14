@@ -22,9 +22,6 @@ public class Test1_AddPatient extends TestCase {
     @Before
     public void setUp() throws Exception{
         super.setUp();
-        String patients, consultations;
-        patients = new String();
-        consultations = new String();
         repo = new Repository("patients.txt", "consultations.txt");
         ctrl = new DoctorController(repo);
         //add a client with a normal name
@@ -35,7 +32,7 @@ public class Test1_AddPatient extends TestCase {
 
     @Test
     public void testAddPatient1() throws PatientException {
-        System.out.println("Test ccase 1");
+        System.out.println("Test ccase 1 - valid product");
         Patient p = new Patient("adriana","1111111111111","adresa");
         ctrl.getPatientList().clear();
         ctrl.addPatient(p);
@@ -46,7 +43,7 @@ public class Test1_AddPatient extends TestCase {
 
     @Test
     public void testAddPatient2() throws PatientException {
-        System.out.println("Test ccase 2");
+        System.out.println("Test ccase 2 - no valid ssn");
         Patient p = new Patient("adriana","111111111","adresa");
         ctrl.getPatientList().clear();
         try {
@@ -60,5 +57,39 @@ public class Test1_AddPatient extends TestCase {
         System.out.println(patientsList.size() + " ");
         Assert.assertFalse("The  patient was not added", patientsList.size() == 1);
     }
+    @Test
+    public void testAddPatient3() throws PatientException {
+        System.out.println("Test ccase 3 - no valid name");
+        Patient p = new Patient("","11111111111","adresa");
+        ctrl.getPatientList().clear();
+        try {
+            ctrl.addPatient(p);
+        }
+        catch(PatientException e)
+        {
+            e.getMessage();
+        }
+        List<Patient> patientsList = ctrl.getPatientList();
+        System.out.println(patientsList.size() + " ");
+        Assert.assertFalse("The  patient was not added", patientsList.size() == 1);
+    }
+    @Test
+    public void testAddPatient4() throws PatientException {
+        System.out.println("Test ccase 4 - one valid product, one invalid product");
+        Patient p1 = new Patient("valid","11111111111","adresa");
+        Patient p2 = new Patient("","11111","adresa");
 
+        ctrl.getPatientList().clear();
+        try {
+            ctrl.addPatient(p1);
+            ctrl.addPatient(p2);
+        }
+        catch(PatientException e)
+        {
+            e.getMessage();
+        }
+        List<Patient> patientsList = ctrl.getPatientList();
+        System.out.println(patientsList.size() + " ");
+        Assert.assertFalse("The invalid patient was not added", patientsList.size() == 1);
+    }
 }
