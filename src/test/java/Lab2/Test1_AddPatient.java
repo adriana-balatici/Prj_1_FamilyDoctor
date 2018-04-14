@@ -60,4 +60,5 @@ public class Test1_AddPatient extends TestCase {
         System.out.println(patientsList.size() + " ");
         Assert.assertFalse("The  patient was not added", patientsList.size() == 1);
     }
+
 }
