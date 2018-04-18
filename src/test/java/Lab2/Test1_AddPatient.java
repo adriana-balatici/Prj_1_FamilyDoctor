@@ -108,4 +108,20 @@ public class Test1_AddPatient extends TestCase {
         System.out.println(patientsList.size() + " ce lungime are lista?");
         Assert.assertFalse("The  patient was added", patientsList.size() == 1);
     }
+    @Test
+    public void testAddPatient6() throws PatientException {
+        System.out.println("Test ccase 5 - no valid ssn, non-numerical ssn");
+        Patient p = new Patient("nume","asdasdasdasds","adresa");
+        ctrl.getPatientList().clear();
+        try {
+            ctrl.addPatient(p);
+        }
+        catch(PatientException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        List<Patient> patientsList = ctrl.getPatientList();
+        System.out.println(patientsList.size() + " ce lungime are lista?");
+        Assert.assertFalse("The  patient was added", patientsList.size() == 1);
+    }
 }

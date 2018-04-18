@@ -54,7 +54,7 @@ public class Test2_ConditionCoverage extends TestCase {
     }
     @Test
     public void testAddconsultation2() {
-        System.out.println("Test case 2 - invalid consultation, invalid patient ssn");
+        System.out.println("Test case 2 - invalid consultation, invalid patient ssn, empty ssn");
         String consID, patientSSN, diag,date;
         List<String> meds = new ArrayList<String>();
         meds.add("sdsf");
@@ -93,4 +93,26 @@ public class Test2_ConditionCoverage extends TestCase {
 
         Assert.assertTrue("the consultation was added", ctrl.getConsultationList().size()==0);
     }
+    @Test
+    public void testAddconsultation4() {
+        System.out.println("Test case 4 - invalid consultation, invalid patient ssn, non-numerical ssn");
+        String consID, patientSSN, diag,date;
+        List<String> meds = new ArrayList<String>();
+        meds.add("sdsf");
+        meds.add("dfgdf");
+        consID="111";
+        patientSSN="";
+        diag="sfsdf";
+        date="fsdfsd";
+        ctrl.getConsultationList().clear();
+
+        try {
+            ctrl.addConsultation(consID, patientSSN,diag ,meds, date);
+        } catch (ConsultationException e) {
+            e.printStackTrace();
+        }
+
+        Assert.assertTrue("the consultation was added", ctrl.getConsultationList().size()==0);
+    }
+
 }
