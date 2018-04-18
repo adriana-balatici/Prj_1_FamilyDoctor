@@ -59,7 +59,7 @@ public class Test1_AddPatient extends TestCase {
     }
     @Test
     public void testAddPatient3() throws PatientException {
-        System.out.println("Test ccase 3 - no valid name");
+        System.out.println("Test ccase 3 - no valid name, emplty name");
         Patient p = new Patient("","11111111111","adresa");
         ctrl.getPatientList().clear();
         try {
@@ -91,5 +91,21 @@ public class Test1_AddPatient extends TestCase {
         List<Patient> patientsList = ctrl.getPatientList();
         System.out.println(patientsList.size() + " ");
         Assert.assertFalse("The invalid patient was not added", patientsList.size() == 1);
+    }
+    @Test
+    public void testAddPatient5() throws PatientException {
+        System.out.println("Test ccase 5 - no valid address, emplty address");
+        Patient p = new Patient("nume","1111111111111","");
+        ctrl.getPatientList().clear();
+        try {
+            ctrl.addPatient(p);
+        }
+        catch(PatientException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        List<Patient> patientsList = ctrl.getPatientList();
+        System.out.println(patientsList.size() + " ce lungime are lista?");
+        Assert.assertFalse("The  patient was added", patientsList.size() == 1);
     }
 }

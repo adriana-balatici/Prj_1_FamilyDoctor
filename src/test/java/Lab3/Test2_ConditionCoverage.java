@@ -88,7 +88,7 @@ public class Test2_ConditionCoverage extends TestCase {
         try {
             ctrl.addConsultation(consID, patientSSN,diag ,meds, date);
         } catch (ConsultationException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         Assert.assertTrue("the consultation was added", ctrl.getConsultationList().size()==0);
